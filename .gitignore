@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Competitive Companion / CP Helper
+.cph/
+
+# Compiled binaries
+*.out
+*.exe
+*.bin
+*.o
+*.obj
+*.class
+
+# Temporary files
+*.log
+*.tmp
+
+# Editor swap files
+*.swp
+*.swo
