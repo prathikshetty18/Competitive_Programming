@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+template<class T> 
+using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;    // find_by_order(x) -> Elements less than x, order_of_key(x) -> xth smallest element
+
+#define ll long long
+#define ld long double
+#define sp " "
+#define nl "\n"
+#define pb push_back
+#define sz size
+#define ff first
+#define ss second
+#define vll vector<ll>
+#define vvll vector<vll>
+#define vvvll vector<vvll>
+#define vpll vector<pair<ll, ll>>
+#define all(v) v.begin(), v.end()
+#define rall(v) v.rbegin(), v.rend()
+#define print(v) for(auto ele : v) cout << ele << sp; cout << nl;
+#define mod 1000000007
+ll mod_add(ll a, ll b, ll m = mod) { return ((a % m) + (b % m)) % m; }
+ll mod_mul(ll a, ll b, ll m = mod) { return ((a % m) * (b % m)) % m; }
+ll ceil_div(ll a, ll b){ return a/b + (a%b != 0); }
+
+void solve(vll &a, vll &b, ll &n, ll &k1, ll &k2){
+
+    ll k = k1 + k2;
+
+    priority_queue<ll> pq;
+
+    for(ll i = 0; i < n; i++){
+    
+        if(a[i] != b[i]) pq.push(abs(a[i]-b[i]));
+    }
+
+    while(k > 0 && !pq.empty()){
+
+        ll diff = pq.top();
+        pq.pop();
+        if(diff > 1) pq.push(diff-1);
+        k -= 1;
+    }
+
+    ll ans = 0;
+
+    while(!pq.empty()){
+
+        ll diff = pq.top();
+        pq.pop();
+        ans += diff * diff;
+    }
+
+    if(k % 2 == 1){
+
+        ans += 1;
+    }
+
+    cout << ans << nl;
+}
+
+int main(){
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    ll t = 1;
+
+    while(t--){
+
+        ll n, k1, k2;
+        
+        cin >> n >> k1 >> k2;
+
+        vll a (n), b(n);
+
+        for(ll i = 0; i < n; i++) cin >> a[i]; 
+        for(ll i = 0; i < n; i++) cin >> b[i]; 
+
+        solve(a, b, n, k1, k2);
+    }
+}
+
